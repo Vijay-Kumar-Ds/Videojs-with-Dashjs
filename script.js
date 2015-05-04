@@ -109,7 +109,7 @@
         return '';
       }
     };
-
+    
     // add this to the list of available controllers
     videojs.options.techOrder.unshift('dashjs');
     
