@@ -151,7 +151,12 @@
                         } else {
                             clearInterval(ticker); // stop counting at zero
                         }
-                        myComponent.newDivTimer_.innerText = 'Ads in ' + secs;
+                        if (secs === 0) {
+                            myComponent.newDivTimer_.innerText = 'Ads in ' + secs;
+                            myComponent.newDivTimer_.style.right = 23 + 'px';
+                        } else {
+                            myComponent.newDivTimer_.innerText = 'Ads in ' + secs;
+                        }
                     }
                     
                     startTimer(options.advertisement.setAdvertisementTime); // starts count down  
@@ -179,10 +184,11 @@
                     
                     c = true; 
                 }
-
+                /*
                 if (getCTime == (options.advertisement.setAdvertisementTime + options.advertisement.setTimeStart + 1) && c == true) {
                     this.removeChild(myComponent);
                 }
+                */
             });
         }
        

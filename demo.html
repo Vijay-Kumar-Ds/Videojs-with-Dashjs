@@ -4,13 +4,14 @@
   <title>Video.js | HTML5 Video Player</title>
 
   <!-- Chang URLs to wherever Video.js files will be hosted -->
-  <link href="video-js.css" rel="stylesheet" type="text/css">
-  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="video-js.less" rel="stylesheet/less" type="text/css">
+  <link href="style.less" rel="stylesheet/less" type="text/css">
     
   <!-- video.js must be in the <head> for older IEs to work. -->
   <script src="video.dev.js"></script>
   <script src="dash.all.js"></script>
   <script src="prefixfree.min.js"></script>
+  <script src="less.min.js"></script>
   <script src="script.js"></script>
   <!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
   <script>
@@ -22,7 +23,7 @@
 <body>
 
   <!-- Standard video.js embed with a DASH source -->
-<video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264" data-setup="{}">
+<video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="640" height="264" data-setup="{}">
   <source src="http://dash.edgesuite.net/akamai/test/caption_test/ElephantsDream/elephants_dream_480p_heaac5_1.mpd" type='application/dash+xml'>
     <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
     <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
@@ -34,7 +35,7 @@
                     plugins: {
                         'myPlugin':{
                             advertisement: {
-                                setTimeStart: 0,  // set number of seconds to show ads
+                                setTimeStart: 5,  // set number of seconds to show ads
                                 setAdvertisementTime: 15, // set total duration shows ads 
                                 contentAds: "Hey! I'm here", // Set null to disappear ads
                             },
@@ -46,12 +47,7 @@
                     }
     
     }, function() { });
-    
-    var notSupportedDiv = document.getElementById('dash-not-supported');
-  if (!videojs.Dashjs.isSupported()) {
-    document.body.insertBefore(notSupportedDiv, document.getElementById('example_video_1'));
-    notSupportedDiv.style.display = 'block';
-  }
+
 </script>
 
 
