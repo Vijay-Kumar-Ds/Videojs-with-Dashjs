@@ -1,6 +1,6 @@
 # Video.js - HTML5 Video Player with advertisement random positions and Streaming MPEG-DASH
 
-  Streaming MPEG-DASH is not now available.
+  Streaming MPEG-DASH is now available.
 
 **Videojs** is a plugin
 
@@ -44,7 +44,6 @@ After copy and paste this javascript code under HTML5 video tag.
 ##Version##
 0.1.0
 
-##Usage##
 
 ## Browser Support##
 HTML5 video support for MPEG-DASH as of today:

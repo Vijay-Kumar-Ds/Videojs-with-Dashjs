@@ -40,7 +40,7 @@
         
         var newDivTimer = videojs.createEl('div', {
             className: 'vjs-div-time',
-            innerHTML: 'Ads in ' + (this.options_.advertisement.setAdvertisementTime)
+            innerHTML: 'Skip Ads in ' + (this.options_.advertisement.setAdvertisementTime)
         });
         
         this.newDivTimer_ = newDivTimer;
@@ -152,10 +152,11 @@
                             clearInterval(ticker); // stop counting at zero
                         }
                         if (secs === 0) {
-                            myComponent.newDivTimer_.innerText = 'Ads in ' + secs;
+                            myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
                             myComponent.newDivTimer_.style.right = 23 + 'px';
+                            myComponent.newDivClose_.style.opacity = 1;
                         } else {
-                            myComponent.newDivTimer_.innerText = 'Ads in ' + secs;
+                            myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
                         }
                     }
                     
@@ -192,6 +193,7 @@
             });
         }
        
+        console.log(myComponent.trigger('click'));
         
         // Get and read MPD file
         

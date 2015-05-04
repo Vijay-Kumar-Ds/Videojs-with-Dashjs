@@ -9,7 +9,10 @@
 @bg-transparent: rgba(0, 0 ,0, 0.6);
 @font-size: 12px;
 @text-align: center;
-@transition-ease-out: all 0.5s ease-out;
+@transition-ease-out: all 0.3s ease-out;
+@opacity-max: 1;
+@opacity-min: 0;
+@opacity-transition: opacity .5s ease-in-out;
 
 
 /* LESS CSS */
@@ -55,13 +58,18 @@ a:active {
     text-align: @text-align;
     padding: 2px 7px;
     color: @text-color;
+    opacity: @opacity-min;
+    transition: @opacity-transition;
+    -webkit-transition: @opacity-transition;
+    -moz-transition: @opacity-transition;
+    -o-transition: @opacity-transition;
 }
 
 .video-js .vjs-div-time {
     position: @position-absolute;
     top: 0px;
     right: 0px;
-    background: red;
+    background: linear-gradient(-45deg, #69c8e7 0%, #49d3b4 100%);
     font-size: @font-size + 2;
     text-align: @text-align;
     padding: 3px 7px;
