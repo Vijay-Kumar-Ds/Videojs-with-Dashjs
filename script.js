@@ -138,7 +138,8 @@
                     
                     var myNewDiv = this.addChild(myComponent);
                     myNewDiv.contentEl_.innerHTML = options.advertisement.contentAds;
-
+                    
+                    //countdown
                     function startTimer(secs){
                         timeInSecs = parseInt(secs - 1);
                         ticker = setInterval(tick,1000);   // every second
@@ -192,19 +193,7 @@
                 */
             });
         }
-       
         console.log(myComponent.trigger('click'));
-        
-        // Get and read MPD file
-        
-        this.on('play', function() {
-            console.log('play');
-        });
-        
-        this.on('pause', function() {
-            //console.log(mpd.getSourceURL());            
-        });
-
         
     };
     
