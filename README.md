@@ -11,8 +11,6 @@
 ```
 <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="640" height="264" data-setup="{}">
   <source src="http://dash.edgesuite.net/akamai/test/caption_test/ElephantsDream/elephants_dream_480p_heaac5_1.mpd" type='application/dash+xml'>
-    <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
-    <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
     <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 </video>
 ```
@@ -25,8 +23,9 @@ After copy and paste this javascript code under HTML5 video tag.
                     plugins: {
                         'myPlugin':{
                             advertisement: {
-                                setTimeStart: 5,  // set number of seconds to show ads
-                                setAdvertisementTime: 15, // set total duration shows ads 
+                                optional: "bottom",  // Set option "bottom" or "random"
+                                setTimeStart: 2,  // Set number of seconds to show ads
+                                setAdvertisementTime: 15, // Set total duration shows ads 
                                 contentAds: "Hey! I'm here", // Set null to disappear ads
                             },
                             wideScreen: {
@@ -34,7 +33,7 @@ After copy and paste this javascript code under HTML5 video tag.
                                 Height: 480 // Set height size for screen
                             }
                         }
-                    }
+                    },
     
     }, function() { });
 
