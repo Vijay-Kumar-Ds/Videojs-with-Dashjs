@@ -14,7 +14,7 @@
                         optional: "random", 
                         setTimeStart: 0,  // set number of seconds to show ads
                         contentAds: null, // Set null to disappear ads
-                        setAdvertisementTime: 0
+                        setAdvertisementTime: 0,
                     },
         wideScreen: {
             Width: 640,
@@ -154,7 +154,7 @@
                             clearInterval(ticker); // stop counting at zero
                         }
                         if (secs === 0) {
-                            myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
+                            myComponent.newDivTimer_.innerText = 'Skip Ads';
                             myComponent.newDivTimer_.style.right = 23 + 'px';
                             myComponent.newDivClose_.style.opacity = 1;
                         } else {
@@ -218,7 +218,7 @@
                             clearInterval(ticker); // stop counting at zero
                         }
                         if (secs === 0) {
-                            myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
+                            myComponent.newDivTimer_.innerText = 'Skip Ads';
                             myComponent.newDivTimer_.style.right = 23 + 'px';
                             myComponent.newDivClose_.style.opacity = 1;
                         } else {
