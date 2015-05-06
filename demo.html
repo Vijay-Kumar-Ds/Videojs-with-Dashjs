@@ -9,7 +9,7 @@
     
   <!-- video.js must be in the <head> for older IEs to work. -->
   <script src="video.dev.js"></script>
-  <script src="dash.debug.js"></script>
+  <script src="dash.all.js"></script>
   <script src="prefixfree.min.js"></script>
   <script src="less.min.js"></script>
   <script src="script.js"></script>
@@ -34,7 +34,7 @@
                     plugins: {
                         'myPlugin':{
                             advertisement: {
-                                optional: "bottom",  // Set option "bottom" or "random"
+                                optional: "random",  // Set option "bottom" or "random"
                                 setTimeStart: 2,  // set number of seconds to show ads
                                 setAdvertisementTime: 15, // set total duration shows ads 
                                 contentAds: "Hey! I'm here", // Set null to disappear ads
