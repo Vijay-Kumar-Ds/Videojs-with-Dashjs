@@ -163,8 +163,6 @@
                     var myNewDiv = this.addChild(myComponent);
                     myNewDiv.contentEl_.innerHTML = options.advertisement.contentAds;
                     
-                    
-                    /*
                     startTimer(options.advertisement.setAdvertisementTime); // starts count down  
                     
                     //Get screen size of ads
@@ -187,7 +185,7 @@
                     this.one(myNewDiv.newDivClose_,'click', function() {
                         this.removeChild(myComponent);
                     });
-                    */
+                    
                     
                     c = true; 
                     
