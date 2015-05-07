@@ -11,6 +11,7 @@
     // default options
     videojs.containerDiv.prototype.options_ = {
         advertisement: {
+                        quantityAds: 0,
                         optional: "random", 
                         setTimeStart: 0,  // set number of seconds to show ads
                         contentAds: null, // Set null to disappear ads
@@ -114,12 +115,33 @@
     // add this to the list of available controllers
     videojs.options.techOrder.unshift('dashjs');
     
-       
     //Plugin function
     var pluginFn = function(options) {
         
         var timeInSecs;
-        var ticker;     
+        var ticker;
+        
+        //countdown
+        function startTimer(secs){
+            timeInSecs = parseInt(secs - 1);
+            ticker = setInterval(tick,1000);   // every second
+        }
+
+        function tick() {
+            var secs = timeInSecs;
+            if (secs > 0) {
+                timeInSecs--;
+            } else {
+                clearInterval(ticker); // stop counting at zero
+            }
+            if (secs === 0) {
+                myComponent.newDivTimer_.innerText = 'Skip Ads';
+                myComponent.newDivTimer_.style.right = 23 + 'px';
+                myComponent.newDivClose_.style.opacity = 1;
+            } else {
+                myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
+            }
+        }    
         
         var myComponent =  new videojs.containerDiv(this, options);
        
@@ -137,31 +159,12 @@
                 
                 if (getCTime == options.advertisement.setTimeStart && c == false && options.advertisement.optional === "random") {
                     
+                    
                     var myNewDiv = this.addChild(myComponent);
                     myNewDiv.contentEl_.innerHTML = options.advertisement.contentAds;
                     
-                    //countdown
-                    function startTimer(secs){
-                        timeInSecs = parseInt(secs - 1);
-                        ticker = setInterval(tick,1000);   // every second
-                    }
-
-                    function tick() {
-                        var secs = timeInSecs;
-                        if (secs > 0) {
-                            timeInSecs--;
-                        } else {
-                            clearInterval(ticker); // stop counting at zero
-                        }
-                        if (secs === 0) {
-                            myComponent.newDivTimer_.innerText = 'Skip Ads';
-                            myComponent.newDivTimer_.style.right = 23 + 'px';
-                            myComponent.newDivClose_.style.opacity = 1;
-                        } else {
-                            myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
-                        }
-                    }
                     
+                    /*
                     startTimer(options.advertisement.setAdvertisementTime); // starts count down  
                     
                     //Get screen size of ads
@@ -184,6 +187,7 @@
                     this.one(myNewDiv.newDivClose_,'click', function() {
                         this.removeChild(myComponent);
                     });
+                    */
                     
                     c = true; 
                     
@@ -202,29 +206,6 @@
                     myNewDiv.el_.style.bottom = 40 + 'px';
                     
                     myNewDiv.contentEl_.innerHTML = options.advertisement.contentAds;
-                    
-                    
-                    //countdown
-                    function startTimer(secs){
-                        timeInSecs = parseInt(secs - 1);
-                        ticker = setInterval(tick,1000);   // every second
-                    }
-
-                    function tick() {
-                        var secs = timeInSecs;
-                        if (secs > 0) {
-                            timeInSecs--;
-                        } else {
-                            clearInterval(ticker); // stop counting at zero
-                        }
-                        if (secs === 0) {
-                            myComponent.newDivTimer_.innerText = 'Skip Ads';
-                            myComponent.newDivTimer_.style.right = 23 + 'px';
-                            myComponent.newDivClose_.style.opacity = 1;
-                        } else {
-                            myComponent.newDivTimer_.innerText = 'Skip Ads in ' + secs;
-                        }
-                    }
                     
                     startTimer(options.advertisement.setAdvertisementTime); // starts count down  
                     
