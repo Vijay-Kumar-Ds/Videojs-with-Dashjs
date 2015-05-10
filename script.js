@@ -11,8 +11,20 @@
     // default options
     videojs.containerDiv.prototype.options_ = {
         advertisement: {
-                        quantityAds: 0,
                         optional: "random", 
+                        quantity: [{
+                        
+                            setTimeStart: 2,  // set number of seconds to show ads
+                            contentAds: null, // Set null to disappear ads
+                            setAdvertisementTime: 0,
+                        
+                        },
+                        {
+                            setTimeStart: 5,  // set number of seconds to show ads
+                            contentAds: null, // Set null to disappear ads
+                            setAdvertisementTime: 0,
+                        }],
+                       
                         setTimeStart: 0,  // set number of seconds to show ads
                         contentAds: null, // Set null to disappear ads
                         setAdvertisementTime: 0,
@@ -115,11 +127,34 @@
     // add this to the list of available controllers
     videojs.options.techOrder.unshift('dashjs');
     
+    videojs.containerDiv.prototype.getAllTimeStartAds = function(type, props) {
+        var a = [];
+        var getTimeStart = this.options_.advertisement.quantity;
+        for (var i = 0; i < getTimeStart.length; i++) {
+            a.push(this.options_.advertisement.quantity[i].setTimeStart);
+        }
+        return a;
+    }
+    
+    videojs.containerDiv.prototype.getTimeFromArray = function(i) {
+        
+        var arr = this.getAllTimeStartAds(this.player_, this.options_);
+        while (i < arr.length) {
+            return arr[i];
+            i++;
+        }
+    }
+    
     //Plugin function
     var pluginFn = function(options) {
         
         var timeInSecs;
         var ticker;
+        
+        var myComponent =  new videojs.containerDiv(this, options);
+       
+        
+        
         
         //countdown
         function startTimer(secs){
@@ -143,13 +178,16 @@
             }
         }    
         
-        var myComponent =  new videojs.containerDiv(this, options);
        
+        
         //Get screen sizes
         var getWidth = this.width(this.offsetWidth, false);
         var getHeight = this.height(this.offsetHeight, false);
          
         this.player_.dimensions(myComponent.getNewWidth(this.options), myComponent.getNewHeight(this.options));
+        
+        //myComponent.getTimeFromArray();
+        var i = 0;
         
         if (options.advertisement.contentAds != null) {
             var c = false;
@@ -157,69 +195,11 @@
                 
                 var getCTime = Math.floor(this.cache_.currentTime);
                 
-                if (getCTime == options.advertisement.setTimeStart && c == false && options.advertisement.optional === "random") {
-                    
-                    
-                    var myNewDiv = this.addChild(myComponent);
-                    myNewDiv.contentEl_.innerHTML = options.advertisement.contentAds;
-                    
-                    startTimer(options.advertisement.setAdvertisementTime); // starts count down  
-                    
-                    //Get screen size of ads
-                    var getWidthAds = myNewDiv.el_.offsetWidth;
-                    var getHeightAds = myNewDiv.el_.offsetHeight;
-
-                    var getSegmentWidth = getWidth - getWidthAds;
-
-                    var randomWidth = Math.floor(1 + Math.random() * (getSegmentWidth - 1));
-                    var randomHeight = Math.floor(1 + Math.random() * (getHeight - 1));
-
-                    if (getWidthAds == myComponent.getNewWidth(this.options)) {
-                        myNewDiv.el_.style.left = 1 + 'px';
-                        myNewDiv.el_.style.top = Math.abs(randomHeight - (getHeightAds - 30)) + 'px';
-                    } else {
-                        myNewDiv.el_.style.left = Math.abs(randomWidth) + 'px';
-                        myNewDiv.el_.style.top = Math.abs(randomHeight - (getHeightAds - 30)) + 'px';
-                    }
-
-                    this.one(myNewDiv.newDivClose_,'click', function() {
-                        this.removeChild(myComponent);
-                    });
-                    
-                    
-                    c = true; 
-                    
-                } else if (getCTime == options.advertisement.setTimeStart && c == false && options.advertisement.optional === "bottom") {
-                    
-                    var myNewDiv = this.addChild(myComponent);
-                    
-                    myNewDiv.el_.style.width = 80 + '%';
-                    
-                    //Get screen size of ads
-                    var getWidthAds = myNewDiv.el_.offsetWidth;
-                    
-                    var getPositionWidth = (options.wideScreen.Width - getWidthAds) / 2;
-                    console.log(options.wideScreen.Height);
-                    myNewDiv.el_.style.left = getPositionWidth + 'px';
-                    myNewDiv.el_.style.bottom = 40 + 'px';
-                    
-                    myNewDiv.contentEl_.innerHTML = options.advertisement.contentAds;
-                    
-                    startTimer(options.advertisement.setAdvertisementTime); // starts count down  
-                    
-                    this.one(myNewDiv.newDivClose_,'click', function() {
-                        this.removeChild(myComponent);
-                    });
-                    
-                    c = true; 
+                if (getCTime == myComponent.getTimeFromArray(i)) {
+                    console.log(myComponent.getTimeFromArray(i));
+                    i++;
                 }
                 
-                
-                /*
-                if (getCTime == (options.advertisement.setAdvertisementTime + options.advertisement.setTimeStart + 1) && c == true) {
-                    this.removeChild(myComponent);
-                }
-                */
             });
         }
         

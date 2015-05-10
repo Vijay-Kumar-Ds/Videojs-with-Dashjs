@@ -34,8 +34,19 @@
                     plugins: {
                         'myPlugin':{
                             advertisement: {
-                                quantityAds: 3,
-                                optional: "random",  // Set option "bottom" or "random"
+                                optional: "random", 
+                        quantity: [{
+                        
+                            setTimeStart: 2,  // set number of seconds to show ads
+                            contentAds: null, // Set null to disappear ads
+                            setAdvertisementTime: 0,
+                        
+                        },
+                        {
+                            setTimeStart: 5,  // set number of seconds to show ads
+                            contentAds: null, // Set null to disappear ads
+                            setAdvertisementTime: 0,
+                        }],
                                 setTimeStart: 2,  // set number of seconds to show ads
                                 setAdvertisementTime: 15, // set total duration shows ads 
                                 contentAds: "Hey! I'm here", // Set null to disappear ads
