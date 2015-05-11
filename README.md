@@ -23,10 +23,26 @@ After copy and paste this javascript code under HTML5 video tag.
                     plugins: {
                         'myPlugin':{
                             advertisement: {
-                                optional: "bottom",  // Set option "bottom" or "random"
-                                setTimeStart: 2,  // Set number of seconds to show ads
-                                setAdvertisementTime: 15, // Set total duration shows ads 
-                                contentAds: "Hey! I'm here", // Set null to disappear ads
+                                show: true, // Set true/false advertisement
+                                optional: "bottom", 
+                                quantity: [{
+
+                                    setTimeStart: 2,  // set number of seconds to show ads
+                                    contentAds: "Hey! I'm Here", // Set null to disappear ads
+                                    setAdvertisementTime: 5,
+
+                                },
+                                {
+                                    setTimeStart: 5,  // set number of seconds to show ads
+                                    contentAds: "Hey! I'm Here, too", // Set null to disappear ads
+                                    setAdvertisementTime: 10,
+                                },
+                                {
+                                    setTimeStart: 8,  // set number of seconds to show ads
+                                    contentAds: "Hello", // Set null to disappear ads
+                                    setAdvertisementTime: 10,
+                                }]
+                                
                             },
                             wideScreen: {
                                 Width: 640, // Set width size for screen
