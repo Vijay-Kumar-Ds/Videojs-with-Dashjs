@@ -11,6 +11,7 @@
     // default options
     videojs.containerDiv.prototype.options_ = {
         advertisement: {
+                        show: false,
                         optional: "random", 
                         quantity: [{
                         
@@ -23,11 +24,9 @@
                             setTimeStart: 5,  // set number of seconds to show ads
                             contentAds: null, // Set null to disappear ads
                             setAdvertisementTime: 0,
-                        }],
+                        }]
                        
-                        setTimeStart: 0,  // set number of seconds to show ads
-                        contentAds: null, // Set null to disappear ads
-                        setAdvertisementTime: 0,
+                        
                     },
         wideScreen: {
             Width: 640,
@@ -189,14 +188,38 @@
         //myComponent.getTimeFromArray();
         var i = 0;
         
-        if (options.advertisement.contentAds != null) {
-            var c = false;
+        if (options.advertisement.show != false) {
             this.on('timeupdate', function() {
                 
                 var getCTime = Math.floor(this.cache_.currentTime);
                 
                 if (getCTime == myComponent.getTimeFromArray(i)) {
-                    console.log(myComponent.getTimeFromArray(i));
+                    
+                    var myAds =  new videojs.containerDiv(this, options);
+                    var myNewDiv = this.addChild(myAds);
+                    myNewDiv.contentEl_.innerHTML = options.advertisement.quantity[i].contentAds;
+                    
+                    //Get screen size of ads
+                    var getWidthAds = myNewDiv.el_.offsetWidth;
+                    var getHeightAds = myNewDiv.el_.offsetHeight;
+
+                    var getSegmentWidth = getWidth - getWidthAds;
+
+                    var randomWidth = Math.floor(1 + Math.random() * (getSegmentWidth - 1));
+                    var randomHeight = Math.floor(1 + Math.random() * (getHeight - 1));
+
+                    if (getWidthAds == myAds.getNewWidth(this.options)) {
+                        myNewDiv.el_.style.left = 1 + 'px';
+                        myNewDiv.el_.style.top = Math.abs(randomHeight - (getHeightAds - 30)) + 'px';
+                    } else {
+                        myNewDiv.el_.style.left = Math.abs(randomWidth) + 'px';
+                        myNewDiv.el_.style.top = Math.abs(randomHeight - (getHeightAds - 30)) + 'px';
+                    }
+
+                    this.one(myNewDiv.newDivClose_,'click', function() {
+                        this.removeChild(myAds);
+                    });
+                    
                     i++;
                 }
                 
